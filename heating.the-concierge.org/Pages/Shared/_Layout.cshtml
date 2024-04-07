@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta name="robots" content="index,follow">
+
+   <meta name="description" content="Your personal problem solver and all-around helpful buddy taking care of all those little details that can stress you out. Your go-to source. Your superhero of convenience. Your very own life-enhancing sidekick.">
+   <meta name="author" content="Peter Bayliss t/a The Concierge Organisation">
+   <meta name="keywords" content="Concierge, Porter, Sidekick, Problem Solver, Buddy">
+
+   <meta name="HandheldFriendly" content="true">
+   <meta name="theme-color" content="#DCDCDC" />
+
+   @if (ViewData["Title"] == null || string.IsNullOrWhiteSpace(ViewData["Title"].ToString())) {
+      <title>The Concierge Org</title>
+   }
+   else {
+      <title>@ViewData["Title"] - The Concierge Org</title>
+   }
+@*    <link rel="manifest" href="/manifest.json">
+
+   <link rel="shortcut icon" href="/favicon.ico">
+   <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+   <link rel="icon" type="image/png" sizes="196x196" href="/ico/favicon-192.png">
+   <link rel="icon" type="image/png" sizes="160x160" href="/ico/favicon-160.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96.png">
+   <link rel="icon" type="image/png" sizes="64x64" href="/ico/favicon-64.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16.png">
+
+
+   <link rel="apple-touch-icon" type="image/png" href="/ico/favicon-57.png">
+   <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/ico/favicon-114.png">
+   <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="/ico/favicon-72.png">
+   <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="/ico/favicon-144.png">
+   <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="/ico/favicon-60.png">
+   <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="/ico/favicon-120.png">
+   <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="/ico/favicon-76.png">
+   <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="/ico/favicon-152.png">
+   <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/ico/favicon-180.png">
+
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" />
+   <link rel="apple-touch-startup-image" type="image/png" href="/img/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
+
+   <link rel="mask-icon" href="/ico/safari-pinned-tab.svg" color="#353535">
+
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="application-name" content="The Concierge">
+   <meta name="apple-mobile-web-app-title" content="The Concierge Organisation">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+   <meta name="msapplication-TileColor" content="#DCDCDC">
+   <meta name="msapplication-TileImage" content="/ico/favicon-144.png">
+   <meta name="msapplication-config" content="/ico/browserconfig.xml">
+ *@
+
+   @await RenderSectionAsync("MetaData", required: false)
+
+
+   <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
+   <link rel="stylesheet" href="~/css/bootstrap-icons.min.css" asp-append-version="true" />
+   <link rel="stylesheet" href="~/css/jquery.dataTables.css" asp-append-version="true" />
+   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+<body>
+
+   <header>
+      <nav class="navbar navbar-dark bg-dark">
+         <div class="container-fluid">
+            <a class="navbar-brand" href="/">Concierge</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+               <i class="bi bi-list"></i>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+               <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Concierge</h5>
+                  <button type="button" class="btn btn-outline-link text-secondary" data-bs-dismiss="offcanvas" aria-label="Close">
+                     <i class="bi bi-x-lg"></i>
+                  </button>
+               </div>
+               <div class="offcanvas-body d-flex flex-column">
+                  <ul class="navbar-nav flex-grow-1 pe-3">
+                     <li class="nav-item"> <a class="nav-link" asp-area="" asp-page="/Index">Reception</a> </li>
+                     <li class="nav-item"> <a class="nav-link" asp-area="" asp-page="/Heating">Heating</a></li>
+                  </ul>
+                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                     <li class="nav-item d-flex flex-column" id="athentication"></li>
+                     <li class="nav-item d-flex flex-column" id="system"></li>
+                     <li class="nav-item" id="copyright"> Copyright &copy; 2023 - Peter Bayliss t/a The Concierge Organisation </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </nav>
+   </header>
+
+@*    <header>
+      <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+         <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="https://placehold.co/40x40/orange/white?text=CO" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+               <ul class="navbar-nav flex-grow-1">
+                  <li class="nav-item">
+                     <a class="nav-link text-dark" asp-area="" asp-page="/Heating">Heating</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+   </header> *@
+
+   <div class="container-fluid">
+      <main role="main" class="pb-3">
+         @RenderBody()
+      </main>
+   </div>
+
+   <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+   <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+   <script src="~/js/site.js" asp-append-version="true"></script>
+
+   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+   <script>
+
+      $(document).ready(function () {
+         checkAuthentication();
+         setInterval(function () {
+            checkAuthentication();
+         }, 60000);
+      });
+
+      function checkAuthentication() {
+
+         $.ajax({
+            url: '/api/authentication',
+            type: 'GET',
+            success: function (data) {
+
+               try {
+
+                  var athenticationCode = ``;
+
+                  athenticationCode += `<span>Authentication</span>`;
+                  athenticationCode += `<span>Token: ${data.access} / ${data.refresh}</span>`;
+                  athenticationCode += `<span>Expires on: ${data.expireson}, in ${data.expiresin}</span>`;
+                  athenticationCode += `<span>First sign on : ${data.firstsignon}</span>`;
+                  athenticationCode += `<span>Last sign on : ${data.lastsignon}</span>`;
+                  athenticationCode += `<span>Last refresh on : ${data.lastrefeshedon}</span>`;
+                  athenticationCode += `<span>Last checked on: ${data.lastOK}</span>`;
+                  athenticationCode += `<span>Last failed on: ${data.lastFailed}</span>`;
+                  athenticationCode += `<span>&nbsp;</span>`;
+
+                  document.getElementById('athentication').innerHTML = athenticationCode;
+
+               }
+               catch (error) {
+                  document.getElementById('athentication').innerHTML = `Authentication failed: ${error}`;
+               }
+
+            },
+            error: function (error) {
+               document.getElementById('athentication').innerHTML = `Authentication failed: ${error}`;
+            }
+         });
+      
+      }
+
+   </script>
+   
+   @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+</html>

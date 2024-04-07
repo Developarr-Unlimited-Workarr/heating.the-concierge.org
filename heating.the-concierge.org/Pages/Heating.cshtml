@@ -1,0 +1,242 @@
+﻿@page
+@using System.Text.RegularExpressions
+@using TheConciergeOrg.Heating.Models
+@model HeatingModel
+@{
+   ViewData["Title"] = "Heating";
+}
+
+<table id="HeatingTable" class="table table-sm  table-striped table-borderless" style="max-width:100vw;">
+
+   @if (Model.Appliances != null && Model.Appliances.Count > 0) {
+
+      @foreach (Appliance appliance in Model.Appliances) {
+
+         <tr id="appliance_@appliance.id">
+
+            <td id="temp_@appliance.id" data-temp="@appliance.temp">
+               <span class="d-flex">
+                  <span id="power_@appliance.id" class="align-self-center">
+                     @if (@appliance.power) {
+                        <button class="btn btn-link" onclick="turnOnOff('@appliance.id', 'off')"><i class="bi bi-toggle2-on fs-3 text-success"></i></button>
+                     }
+                     else {
+                        <button class="btn btn-link" onclick="turnOnOff('@appliance.id', 'on')"><i class="bi bi-toggle2-off fs-3 text-danger"></i></button>
+                     }
+                  </span>
+                  <button id="countdown_@appliance.id" type="button" class="btn btn-link heat"><span title="@appliance.mode / @appliance.status"><i class="bi bi-clock-history"></i></span></button>
+                  <span id="name_@appliance.id" class="flex-grow-1 align-self-center" title="@appliance.id" style="padding:12px;">
+                     @Regex.Replace(@appliance.name, "\\([^)]*\\)", "").Trim()
+                  </span>
+                  <span id="temp_@appliance.id" class="align-self-center" style="padding:12px;">
+                     <span id="actual_temp_@appliance.id">@appliance.temp_probe&deg;C</span>
+                     <span id="target_temp_@appliance.id">(@appliance.temp&deg;C)</span>
+                  </span>
+               </span>
+               <div id="temperature_@appliance.id" class="btn-toolbar justify-content-between temperature" role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group btn-group-lg" role="group">
+                     <button id="temperature_ice_@appliance.id" type="button" class="btn btn-link">
+                        <i class="bi bi-snow ice"></i>
+                     </button>
+                     <button id="temperature_min_@appliance.id" type="button" class="btn btn-link icon-offset-3">
+                        <i class="bi bi-cloud min"></i>
+                     </button>
+                     <button id="temperature_comfort_@appliance.id" type="button" class="btn btn-link icon-offset-5">
+                        <i class="bi bi-cloud-sun comfort"></i>
+                     </button>
+                     <button id="temperature_heat_@appliance.id" type="button" class="btn btn-link ">
+                        <i class="bi bi-brightness-high heat"></i>
+                     </button>
+                     <div class="input-group manual-temp-group">
+                        <button id="temperature_manual_@appliance.id" type="button" class="btn btn-link manual-temp-button icon-offset-2" onclick="setTemperature('@appliance.id')">
+                           <i class="bi bi-hand-index-thumb manual-temp-icon"></i>
+                        </button>
+                        <input id="temperature_value_@appliance.id" type="number" min="15" max="30" class="form-control manual-temp-value" placeholder="" value="@appliance.temp">
+                     </div>
+                  </div>
+               </div>
+            </td>
+
+         </tr>
+
+      }
+
+   }
+
+</table>
+
+@section Scripts {
+
+   <script>
+      // $(document).ready(function () {
+      //    $('#HeatingTable').DataTable({
+      //       "dom": 't'
+      //    });
+      // });
+
+   </script>
+
+   <script>
+
+      $(document).ready(function () {
+
+         updateApplianceStatus();
+
+         setInterval(function () {
+
+            updateApplianceStatus();
+
+         }, 5000);
+
+      });
+
+      function turnOnOff(deviceId, state) {
+         $.ajax({
+            url: '/api/appliance/' + deviceId + '/' + state,
+            type: 'POST',
+            success: function (data) {
+               updatePowerStatus(data.applianceId, data.power);
+            },
+            error: function (error) {
+               console.log(error);
+            }
+         });
+      }
+
+      function setTemperature(deviceId) {
+
+         const tempToSet = $("#temperature_value_" + deviceId).val();
+
+         $.ajax({
+            url: `/api/appliance/${deviceId}/temperature/${tempToSet}`,
+            type: 'POST',
+            success: function (data) {
+
+               updatePowerStatus(data.id, data.power);
+
+            },
+            error: function (error) {
+               console.log(error);
+            }
+         });
+      }
+
+      var isIntervalRunning = false;
+
+      function updateApplianceStatus() {
+
+         if (!isIntervalRunning) {
+
+            isIntervalRunning = true;
+
+            try {
+
+               $('[id^="appliance_"]').map(function () {
+
+                  try {
+
+                     var applianceId = this.id.split('_')[1];
+
+                     $.ajax({
+                        url: `/api/appliance/${applianceId}`,
+                        type: 'GET',
+                        success: function (data) {
+
+                           console.log(JSON.stringify(data));
+
+                           updatePowerStatus(data.id, data.power);
+
+                           if (data.power) {
+
+                              if (1 != 1)
+                                 ($(`#countdown_${data.id}`).find(`i`)).removeClass("disabledItem");
+                              else
+                                 ($(`#countdown_${data.id}`).find(`i`)).addClass("disabledItem");
+
+                              if (data.mode == "manual" && data.staus == "ice")
+                                 ($(`#temperature_ice_${data.id}`).find(`i`)).removeClass("disabledItem");
+                              else
+                                 ($(`#temperature_ice_${data.id}`).find(`i`)).addClass("disabledItem");
+
+                              if (data.mode == "manual" && data.status == "eco")
+                                 ($(`#temperature_min_${data.id}`).find(`i`)).removeClass("disabledItem");
+                              else
+                                 ($(`#temperature_min_${data.id}`).find(`i`)).addClass("disabledItem");
+
+                              if (data.mode == "manual" && data.status == "comfort")
+                                 ($(`#temperature_comfort_${data.id}`).find(`i`)).removeClass("disabledItem");
+                              else
+                                 ($(`#temperature_comfort_${data.id}`).find(`i`)).addClass("disabledItem");
+
+                              if (data.mode == "manual" && data.target_temp == 21)
+                                 ($(`#temperature_heat_${data.id}`).find(`i`)).removeClass("disabledItem");
+                              else
+                                 ($(`#temperature_heat_${data.id}`).find(`i`)).addClass("disabledItem");
+
+                              if (data.mode == "manual" && data.status == "none" && data.target_temp != 21) {
+                                 ($(`#temperature_manual_${data.id}`).find(`i`)).removeClass("disabledItem");
+                                 $(`#temperature_value_${data.id}`).removeClass("disabledItem");
+                              }
+                              else {
+                                 ($(`#temperature_manual_${data.id}`).find(`i`)).addClass("disabledItem");
+                                 $(`#temperature_value_${data.id}`).addClass("disabledItem");
+                              }
+
+                              $(`#target_temp_${data.id}`).removeClass("disabledItem");
+
+                           }
+                           else {
+
+                              ($(`#countdown_${data.id}`).find(`i`)).addClass("disabledItem");
+                              ($(`#temperature_ice_${data.id}`).find(`i`)).addClass("disabledItem");
+                              ($(`#temperature_min_${data.id}`).find(`i`)).addClass("disabledItem");
+                              ($(`#temperature_comfort_${data.id}`).find(`i`)).addClass("disabledItem");
+                              ($(`#temperature_heat_${data.id}`).find(`i`)).addClass("disabledItem");
+                              ($(`#temperature_manual_${data.id}`).find(`i`)).addClass("disabledItem");
+
+                              $(`#temperature_value_${data.id}`).addClass("disabledItem");
+                              $(`#target_temp_${data.id}`).addClass("disabledItem");
+
+                           }
+
+                        },
+                        error: function (error) {
+                           console.log(error);
+                        }
+                     });
+
+                  }
+                  catch (error) { }
+
+               }).get();
+
+            }
+            catch (error) { }
+
+            isIntervalRunning = false;
+
+         }
+
+      }
+
+
+      function updatePowerStatus(deviceId, state) {
+
+         try {
+
+            var onoffState = state == true ? "off" : "on";
+            var onoffClass = state == true ? "bi-toggle2-on text-success" : "bi-toggle2-off text-danger";
+
+
+            $(`#power_${deviceId}`).html(`<button class="btn btn-link" onclick="turnOnOff('${deviceId}', '${onoffState}')"><i class="bi ${onoffClass} fs-3 "></i></button>`);
+
+         }
+         catch (error) {
+            console.log(error);
+         }
+
+      }
+
+   </script>
+
+}

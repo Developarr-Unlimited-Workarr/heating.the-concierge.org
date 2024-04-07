@@ -1,0 +1,60 @@
+﻿@page
+@using System.Text.RegularExpressions
+@using Newtonsoft.Json
+@using TheConciergeOrg.Heating.Models
+
+
+@model IndexModel
+
+@section Styles {
+   <style>
+
+      main {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+      .welcome {
+         font-size: 2em;
+         text-align: center;
+         letter-spacing: 0.1em;
+      }
+
+      .brand-name {
+         font-size: max(0.5vw, 80%, 2em);
+      }
+
+      .ptr--text {
+         color: rgba(255, 255, 255, 0.3) !important;
+      }
+
+      .ptr--icon {
+         color: rgba(255, 255, 255, 0.3) !important;
+      }
+
+   </style>
+}
+
+<main>
+   <div class="welcome">
+      <p>Welcome to</p>
+      <p><span class="brand-name">The Concierge</span><br /><span>-- Organisation --</span></p>
+      <table style="font-size:0.5em">
+         <tbody>
+            @foreach (var item in Model.Tasks) {
+               <tr>
+                  <td>@item.Id<br />@item.CreatedOn<br />@item.ActionOn</td>
+                  <td><pre style="max-width:500px;text-overflow: clip; text-overflow: ellipsis ellipsis; text-overflow: ellipsis " [..]";">@JsonConvert.SerializeObject(@item.Appliance, Formatting.Indented)</pre></td>
+               </tr>
+            }
+         </tbody>
+      </table>
+   </div>
+
+ 
+
+</main>
+@section Scripts {
+
+}

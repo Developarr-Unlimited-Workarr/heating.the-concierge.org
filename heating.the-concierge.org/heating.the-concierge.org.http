@@ -1,0 +1,13 @@
+﻿@TheConciergeOrg.Heating_HostAddress = https://localhost:7288
+@TheConciergeOrg.Heating_DeviceID = D0F281E350CCD0F281E350CC
+POST {{TheConciergeOrg.Heating_HostAddress}}/api/appliance/{{TheConciergeOrg.Heating_DeviceID}}/off
+
+###
+
+POST {{TheConciergeOrg.Heating_HostAddress}}/api/appliance/{{TheConciergeOrg.Heating_DeviceID}}/on
+
+###
+
+GET {{TheConciergeOrg.Heating_HostAddress}}/api/appliance/{id}
+
+###

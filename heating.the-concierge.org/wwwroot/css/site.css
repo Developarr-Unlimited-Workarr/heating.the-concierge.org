@@ -1,0 +1,89 @@
+/* Site wide cascading style sheets */
+
+html, body {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   background-color: rgb(33, 37, 41) !important;
+}
+
+body {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
+header, main, footer {
+   flex-shrink: 0;
+}
+
+main {
+   flex-grow: 1;
+}
+
+.offcanvas {
+   width: 100vw !important;
+}
+
+.temperature > span > input {
+}
+
+.icon-offset-5 {
+   margin-top: -4px;
+}
+
+.icon-offset-3 {
+   margin-top: 1px;
+}
+
+.icon-offset-2 {
+   margin-top: -4px;
+}
+
+.ice {
+   color: rgb(102,178,255);
+}
+
+.min {
+   color: rgb(51, 128, 255)
+}
+
+.comfort {
+   color: rgb(255, 139, 39)
+}
+
+.heat {
+   color: rgb(255, 89, 11)
+}
+
+.blazing {
+   color: rgb(255, 0, 0)
+}
+
+.manual {
+   color: rgb(128,128,128);
+}
+
+.manual-temp-button {
+   padding: 0 10px 0 7px;
+   font-size: 1.25rem;
+}
+
+.manual-temp-icon:before {
+   rotate: 90deg;
+   /* margin-top: -5px; */
+}
+
+.manual-temp-value {
+   min-width: 60px !important;
+   background-color: transparent;
+   padding: 0;
+   padding-left:5px;
+   margin-top:-5px;
+   border: none;
+}
+
+.disabledItem{
+   color:rgb(25,25,25);
+}

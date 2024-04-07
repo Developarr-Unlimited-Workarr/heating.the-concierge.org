@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\TheConciergeOrg.Heating.props" />
+</Project>
