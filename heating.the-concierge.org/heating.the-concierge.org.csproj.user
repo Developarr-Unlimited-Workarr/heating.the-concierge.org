@@ -2,5 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>https</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\DeveloparrUnlimited\source\repos\~~Azure Portals\heating.the-concierge.org\.github\workflows\heating-theconcierge.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
