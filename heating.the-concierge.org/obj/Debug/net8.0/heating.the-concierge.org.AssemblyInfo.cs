@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("heating.the-concierge.org")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ad173dfd85c0e784a9bd5d41e5595f7567e8fea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2558fa8e62159a57259d8f20f2472ab48f68c213")]
 [assembly: System.Reflection.AssemblyProductAttribute("heating.the-concierge.org")]
 [assembly: System.Reflection.AssemblyTitleAttribute("heating.the-concierge.org")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
